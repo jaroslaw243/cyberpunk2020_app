@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+__pycache__
+shooting_cyberpunk.py
+gui_cyberpunk.spec
+pyvenv.cfg
+venv
