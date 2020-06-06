@@ -1,5 +1,5 @@
 # Purpose 
-Simple script for tabletop Cyberpunk combat. 
+Simple script for tabletop Cyberpunk HNS combat. 
 # Usage
 main script is `gui_cyberpunk`, it contains gui in tkinter  
 two classes for the app are contained in `testnpc`  
