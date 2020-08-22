@@ -17,21 +17,21 @@ class Character:
         self.name = name
 
     def stun_check(self):
-        stun_safe_value = self.BC - (int(((self.hplost) / 4) - 0.001))
+        stun_safe_value = self.BC - (int((self.hplost / 4) - 0.001))
         if stun_safe_value >= random.randint(1, 10):
             return True
         else:
             return False
 
     def life_check(self):
-        life_safe_value = self.BC - (int(((self.hplost) / 4) - 3.001))
+        life_safe_value = self.BC - (int((self.hplost / 4) - 3.001))
         if life_safe_value >= random.randint(1, 10):
             return True
         else:
             return False
 
     def bc_to_mbc(self):
-        mbc = [0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5]
+        mbc = (0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5)
         if 0 < self.BC <= 11:
             return -mbc[self.BC - 1]
         else:
@@ -63,13 +63,13 @@ class Character:
 
     @staticmethod
     def hns_armor_protection(armor, armor_piercing, armor_rigidity):
-        armor_to_armor_protection = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,
+        armor_to_armor_protection = (0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,
                                      7, 7,
                                      7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 12, 12, 12,
                                      12, 12,
                                      12, 12, 12, 12, 12, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 16, 16, 16, 16, 16, 16,
                                      16, 16,
-                                     16, 16, 18]
+                                     16, 16, 18)
         if armor > 80:
             armor = 80
 
@@ -105,13 +105,13 @@ class Character:
 
     @staticmethod
     def hit_location():
-        body_locations = ['head', 'torso', 'torso', 'torso', 'right arm', 'left arm', 'right leg', 'right leg',
-                          'left leg', 'left leg']
+        body_locations = ('head', 'torso', 'torso', 'torso', 'right arm', 'left arm', 'right leg', 'right leg',
+                          'left leg', 'left leg')
         return body_locations[random.randint(0, 9)]
 
     @staticmethod
     def hns_damage(bonus_to_roll):
-        damage_rolls = [0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7]
+        damage_rolls = (0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7)
         total_roll = damage_rolls[random.randint(0, 14)] + bonus_to_roll
         if total_roll <= 7:
             return total_roll
@@ -163,7 +163,7 @@ class Combat:
             self.hit = False
 
     def modifiers(self, mod):
-        rates_of_fire_list = [3, 5, 10, 20, 25, 30, 100]
+        rates_of_fire_list = (3, 5, 10, 20, 25, 30, 100)
         mod = round((mod % 1) * 100)
         if mod == 50:
             self.aiming_at_body_location = True
