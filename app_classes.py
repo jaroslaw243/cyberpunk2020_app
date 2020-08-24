@@ -3,7 +3,7 @@ import random
 
 class Character:
     def __init__(self, hplost, BC, dodgebase, armorhead, armortorso, armorlefthand, armorrighthand, armorleftleg,
-                 armorrightleg, hard_armor, name):
+                 armorrightleg, hard_armor):
         self.hplost = hplost
         self.BC = BC
         self.dodgebase = dodgebase
@@ -14,7 +14,6 @@ class Character:
         self.armorleftleg = armorleftleg
         self.armorrightleg = armorrightleg
         self.hard_armor = hard_armor
-        self.name = name
 
     def stun_check(self):
         stun_safe_value = self.BC - (int((self.hplost / 4) - 0.001))
@@ -170,4 +169,3 @@ class Combat:
         if 11 <= mod <= 17:
             self.full_auto = True
             self.rate_of_fire = rates_of_fire_list[mod - 11]
-

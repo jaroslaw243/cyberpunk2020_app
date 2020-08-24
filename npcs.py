@@ -13,5 +13,4 @@ stockley_guard = {'dodgebase': 18, 'armorhead': 28, 'armortorso': 26, 'armorleft
 militia = {'dodgebase': 8, 'armorhead': 20, 'armortorso': 4, 'armorlefthand': 4, 'armorrighthand': 4,
            'armorleftleg': 4, 'armorrightleg': 4, 'hard_armor': False, 'BC': 5, 'name': 'Militia'}
 
-all_npcs = [valkyrie, cultist_officer, cultist_elite, cultist_basic, corp_grunt, stockley_guard, militia]
-
+all_npcs = (valkyrie, cultist_officer, cultist_elite, cultist_basic, corp_grunt, stockley_guard, militia)

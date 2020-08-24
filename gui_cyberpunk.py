@@ -27,9 +27,8 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
     global fight
     enemy_stats = npcs.all_npcs[enemy_stats_index.get() - 1]
     enemy = Character(0, enemy_stats['BC'], enemy_stats['dodgebase'], enemy_stats['armorhead'],
-                            enemy_stats['armortorso'], enemy_stats['armorlefthand'], enemy_stats['armorrighthand'],
-                            enemy_stats['armorleftleg'], enemy_stats['armorrightleg'], enemy_stats['hard_armor'],
-                            'John')
+                      enemy_stats['armortorso'], enemy_stats['armorlefthand'], enemy_stats['armorrighthand'],
+                      enemy_stats['armorleftleg'], enemy_stats['armorrightleg'], enemy_stats['hard_armor'])
     armor_of_body_part = {'head': enemy.armorhead, 'torso': enemy.armortorso, 'left arm': enemy.armorlefthand,
                           'right arm': enemy.armorrighthand, 'left leg': enemy.armorleftleg,
                           'right leg': enemy.armorrightleg}
@@ -49,8 +48,7 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
         if not fight.aiming_at_body_location:
             hit_location = enemy.hit_location()
         else:
-            popup_ch_bod_loc()
-            hit_location = hit_location_temp.get()
+            hit_location = popup_ch_bod_loc().get()
         armor_prot = enemy.hns_armor_protection(armor_of_body_part[hit_location], fight.monoblade, enemy.hard_armor)
         if not fight.full_auto:
             damage_dealt = enemy.damage_dealt_no_full_auto(hit_location, damage, armor_prot, enemy.bc_to_mbc())
@@ -69,7 +67,8 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
         else:
             char_state_l = 'Character died.'
 
-        output['text'] = f'Hit landed at {hit_location} and dealt {damage_dealt} damage. \n' + char_state_c + char_state_l
+        output[
+            'text'] = f'Hit landed at {hit_location} and dealt {damage_dealt} damage. \n' + char_state_c + char_state_l
     else:
         output['text'] = 'Missed.'
 
@@ -85,7 +84,6 @@ def get_value(entryWidget):
 
 
 def popup_ch_bod_loc():
-    global hit_location_temp
     hit_location_temp = tk.StringVar(value='head')
     choose_hit_location = tk.Toplevel()
     choose_hit_location.title('Choose body location')
@@ -102,6 +100,8 @@ def popup_ch_bod_loc():
     BL4.pack(anchor='w')
     BL5.pack(anchor='w')
     BL6.pack(anchor='w')
+
+    return hit_location_temp
 
 
 root = tk.Tk()
