@@ -4,3 +4,5 @@ shooting_cyberpunk.py
 gui_cyberpunk.spec
 pyvenv.cfg
 venv
+build
+dist
