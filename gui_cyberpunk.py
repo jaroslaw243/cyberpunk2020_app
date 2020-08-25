@@ -91,6 +91,9 @@ def popup_ch_bod_loc():
     hit_location_temp = tk.StringVar(value='head')
     choose_hit_location = tk.Toplevel()
     choose_hit_location.title('Choose body location')
+    canvas_top = tk.Canvas(choose_hit_location, height=0, width=280)
+    canvas_top.pack()
+
     BL1 = tk.Radiobutton(choose_hit_location, text="Head", variable=hit_location_temp, value='head')
     BL2 = tk.Radiobutton(choose_hit_location, text="Torso", variable=hit_location_temp, value='torso')
     BL3 = tk.Radiobutton(choose_hit_location, text="Left arm", variable=hit_location_temp, value='left arm')
