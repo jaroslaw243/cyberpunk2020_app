@@ -1,4 +1,5 @@
 import tkinter as tk
+import os.path
 import npcs
 from app_classes import Character, Combat
 
@@ -115,8 +116,12 @@ root.title('Cyberpunk 2020 High Noon Shootout App')
 canvas = tk.Canvas(root, height=720, width=1280)
 canvas.pack()
 
-background_image = tk.PhotoImage(file='cyberpunk_background.png')
-background_label = tk.Label(root, image=background_image)
+if os.path.isfile('./cyberpunk_background.png'):
+    background_image = tk.PhotoImage(file='cyberpunk_background.png')
+    background_label = tk.Label(root, image=background_image)
+else:
+    background_label = tk.Label(root, bg='#130012')
+
 background_label.place(relwidth=1, relheight=1)
 
 weapons_menu = tk.Frame(root, bg='#b50000')
