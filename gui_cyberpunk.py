@@ -83,7 +83,7 @@ def get_value(entryWidget):
     try:
         return int(value)
     except ValueError:
-        return None
+        return 0
 
 
 def popup_ch_bod_loc():
@@ -168,7 +168,7 @@ bonus_damage_entry.place(rely=0.13, relx=0.4, relheight=0.07, relwidth=0.23)
 base_t_h_v_entry = tk.Entry(inputs_menu)
 base_t_h_v_entry.place(rely=0.235, relx=0.4, relheight=0.07, relwidth=0.23)
 
-weapon_choice = tk.IntVar()
+weapon_choice = tk.IntVar(value=1)
 text_for_w_radiobutton = ("Handgun (also paintball guns, dart guns and tasers)", "SMG, Bow", "Shotgun", "Rifle, MG",
                           "Laser (also microwavers)", "Cannon (also grenade launchers and hand thrown grenades)",
                           "Missile (also mini-missiles)", "Rockets", "Brawling", "Melee weapon", "Monoblade")
@@ -177,13 +177,13 @@ for row_w in range(11):
                        bg='#b50000')
     R.pack(anchor='w')
 
-enemy_stats_index = tk.IntVar()
+enemy_stats_index = tk.IntVar(value=1)
 for row_c in range(1, len(npcs.all_npcs) + 1):
     A = tk.Radiobutton(characters_menu, text=npcs.all_npcs[row_c - 1]['name'], variable=enemy_stats_index, value=row_c,
                        bg='#F3ED73')
     A.grid(sticky='w', column=0, row=row_c)
 
-damage_choice = tk.IntVar()
+damage_choice = tk.IntVar(value=1)
 text_for_d_radiobutton = ("1k6/3", "1k6/2", "1k6", "2k6", "3k6", "4k6", "5k6", "6k6", "3k10", "4k10", "5k10", "6k10",
                           "7k10", "8k10", "9k10", "More")
 for row_d1 in range(8):
