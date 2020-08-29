@@ -117,10 +117,13 @@ canvas = tk.Canvas(root, height=720, width=1280)
 canvas.pack()
 
 if os.path.isfile('./cyberpunk_background.png'):
-    background_image = tk.PhotoImage(file='cyberpunk_background.png')
+    background_image = tk.PhotoImage(file='./cyberpunk_background.png')
     background_label = tk.Label(root, image=background_image)
 else:
     background_label = tk.Label(root, bg='#130012')
+
+if os.path.isfile('./cyberpunk_window_icon.ico'):
+    root.iconbitmap(False, './cyberpunk_window_icon.ico')
 
 background_label.place(relwidth=1, relheight=1)
 
