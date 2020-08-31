@@ -16,6 +16,7 @@ class Character:
         self.hard_armor = hard_armor
         self.armor_protection = None
         self.hit_location = None
+        self.damage = None
 
     def stun_check(self):
         stun_safe_value = self.BC - (int((self.hplost / 4) - 0.001))
@@ -43,11 +44,11 @@ class Character:
         for i in range(0, number_of_hits_func):
             dice_damage_func = self.hns_damage(weapon_damage_bonus_func)
             damage_func += damage_table_func[dice_damage_func][weapon_damage_func]
-        return damage_func
+        self.damage = damage_func
 
-    def damage_dealt_full_auto(self, damage_func, number_of_hits_func):
+    def damage_dealt_full_auto(self, number_of_hits_func):
         if self.hit_location == 'head':
-            damage_dealt_full_auto = ((damage_func - (self.armor_protection * number_of_hits_func)) * 4) + (
+            damage_dealt_full_auto = ((self.damage - (self.armor_protection * number_of_hits_func)) * 4) + (
                                        self.bc_to_mbc() * number_of_hits_func)
 
             if damage_dealt_full_auto < 0:
@@ -55,7 +56,7 @@ class Character:
 
             self.hplost += damage_dealt_full_auto
         else:
-            damage_dealt_full_auto = ((damage_func - (self.armor_protection * number_of_hits_func)) * 2) + (
+            damage_dealt_full_auto = ((self.damage - (self.armor_protection * number_of_hits_func)) * 2) + (
                                        self.bc_to_mbc() * number_of_hits_func)
 
             if damage_dealt_full_auto < 0:
@@ -63,16 +64,16 @@ class Character:
 
             self.hplost += damage_dealt_full_auto
 
-    def damage_dealt_no_full_auto(self, damage_func):
+    def damage_dealt_no_full_auto(self):
         if self.hit_location == 'head':
-            damage_dealt = ((damage_func - self.armor_protection) * 4) + self.bc_to_mbc()
+            damage_dealt = ((self.damage - self.armor_protection) * 4) + self.bc_to_mbc()
 
             if damage_dealt < 0:
                 damage_dealt = 0
 
             self.hplost += damage_dealt
         else:
-            damage_dealt = ((damage_func - self.armor_protection) * 2) + self.bc_to_mbc()
+            damage_dealt = ((self.damage - self.armor_protection) * 2) + self.bc_to_mbc()
 
             if damage_dealt < 0:
                 damage_dealt = 0

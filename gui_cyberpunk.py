@@ -39,10 +39,10 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
     fight.hit_calc(base_t_h_v + sum_mods)
     if fight.hit:
         if not fight.full_auto:
-            damage = damage_table1[enemy.hns_damage(bonus_damage)][chosen_weapon_damage - 1]
+            enemy.damage = damage_table1[enemy.hns_damage(bonus_damage)][chosen_weapon_damage - 1]
         else:
-            damage = enemy.full_auto_damage(fight.number_of_hits, (chosen_weapon_damage - 1), bonus_damage,
-                                            damage_table1)
+            enemy.full_auto_damage(fight.number_of_hits, (chosen_weapon_damage - 1), bonus_damage, damage_table1)
+
         if not fight.aiming_at_body_location:
             enemy.random_hit_location()
         else:
@@ -52,9 +52,9 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
 
         enemy.hns_armor_protection(fight.monoblade)
         if not fight.full_auto:
-            enemy.damage_dealt_no_full_auto(damage)
+            enemy.damage_dealt_no_full_auto()
         else:
-            enemy.damage_dealt_full_auto(damage, fight.number_of_hits)
+            enemy.damage_dealt_full_auto(fight.number_of_hits)
 
         if enemy.life_check():
             if not enemy.stun_check():
