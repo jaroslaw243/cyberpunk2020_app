@@ -30,15 +30,12 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
     enemy = Character(0, enemy_stats['BC'], enemy_stats['dodgebase'], enemy_stats['armorhead'],
                       enemy_stats['armortorso'], enemy_stats['armorlefthand'], enemy_stats['armorrighthand'],
                       enemy_stats['armorleftleg'], enemy_stats['armorrightleg'], enemy_stats['hard_armor'])
-    armor_of_body_part = {'head': enemy.armorhead, 'torso': enemy.armortorso, 'left arm': enemy.armorlefthand,
-                          'right arm': enemy.armorrighthand, 'left leg': enemy.armorleftleg,
-                          'right leg': enemy.armorrightleg}
     char_state_c = ''
     char_state_l = ''
     sum_mods = int(sum([mod1.get(), mod2.get(), mod3.get(), mod4.get(), mod5.get(), mod6.get(), mod7.get(), mod8.get(),
                         mod9.get(), mod10.get(), mod11.get(), mod12.get(), mod13.get(), mod14.get(), mod15.get(),
                         mod16.get(), mod17.get(), mod18.get(), mod19.get()]))
-    fight.shot_parameters(chosen_weapon, enemy.hns_difficulty(dist), difficulty_table1, enemy.dodgebase)
+    fight.shot_parameters(chosen_weapon, dist, difficulty_table1, enemy.dodgebase)
     fight.hit_calc(base_t_h_v + sum_mods)
     if fight.hit:
         if not fight.full_auto:
@@ -47,32 +44,29 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
             damage = enemy.full_auto_damage(fight.number_of_hits, (chosen_weapon_damage - 1), bonus_damage,
                                             damage_table1)
         if not fight.aiming_at_body_location:
-            hit_location = enemy.hit_location()
+            enemy.random_hit_location()
         else:
             popup_ch_bod_loc()
             root.wait_window(choose_hit_location)
-            hit_location = hit_location_temp.get()
+            enemy.hit_location = hit_location_temp.get()
 
-        armor_prot = enemy.hns_armor_protection(armor_of_body_part[hit_location], fight.monoblade, enemy.hard_armor)
+        enemy.hns_armor_protection(fight.monoblade)
         if not fight.full_auto:
-            damage_dealt = enemy.damage_dealt_no_full_auto(hit_location, damage, armor_prot, enemy.bc_to_mbc())
+            enemy.damage_dealt_no_full_auto(damage)
         else:
-            damage_dealt = enemy.damage_dealt_full_auto(hit_location, damage, armor_prot, enemy.bc_to_mbc(),
-                                                        fight.number_of_hits)
-        if damage_dealt < 0:
-            damage_dealt = 0
-        enemy.hplost += damage_dealt
+            enemy.damage_dealt_full_auto(damage, fight.number_of_hits)
+
         if enemy.life_check():
             if not enemy.stun_check():
                 char_state_c = 'Character is stunned. \n'
-            if hit_location == 'head' and damage_dealt >= 13:
+            if enemy.hit_location == 'head' and enemy.hplost >= 13:
                 char_state_c = ''
                 char_state_l = 'Character died.'
         else:
             char_state_l = 'Character died.'
 
         output[
-            'text'] = f'Hit landed at {hit_location} and dealt {damage_dealt} damage. \n' + char_state_c + char_state_l
+            'text'] = f'Hit landed at {enemy.hit_location} and dealt {enemy.hplost} damage. \n' + char_state_c + char_state_l
     else:
         output['text'] = 'Missed.'
 
