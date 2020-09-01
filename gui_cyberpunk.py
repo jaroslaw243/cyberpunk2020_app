@@ -186,8 +186,8 @@ for row_c in range(1, len(npcs.all_npcs) + 1):
     A.grid(sticky='w', column=0, row=row_c)
 
 damage_choice = tk.IntVar(value=1)
-text_for_d_radiobutton = ("1k6/3", "1k6/2", "1k6", "2k6", "3k6", "4k6", "5k6", "6k6", "3k10", "4k10", "5k10", "6k10",
-                          "7k10", "8k10", "9k10", "More")
+text_for_d_radiobutton = ("1d6/3", "1d6/2", "1d6", "2d6", "3d6", "4d6", "5d6", "6d6", "3d10", "4d10", "5d10", "6d10",
+                          "7d10", "8d10", "9d10", "More")
 for row_d1 in range(8):
     D = tk.Radiobutton(w_dam_entry, text=text_for_d_radiobutton[row_d1], variable=damage_choice, value=row_d1 + 1,
                        bg='#52b94c')

@@ -50,35 +50,25 @@ class Character:
         if self.hit_location == 'head':
             damage_dealt_full_auto = ((self.damage - (self.armor_protection * number_of_hits_func)) * 4) + (
                                        self.bc_to_mbc() * number_of_hits_func)
-
-            if damage_dealt_full_auto < 0:
-                damage_dealt_full_auto = 0
-
-            self.hplost += damage_dealt_full_auto
         else:
             damage_dealt_full_auto = ((self.damage - (self.armor_protection * number_of_hits_func)) * 2) + (
                                        self.bc_to_mbc() * number_of_hits_func)
 
-            if damage_dealt_full_auto < 0:
-                damage_dealt_full_auto = 0
+        if damage_dealt_full_auto < 0:
+            damage_dealt_full_auto = 0
 
-            self.hplost += damage_dealt_full_auto
+        self.hplost += damage_dealt_full_auto
 
     def damage_dealt_no_full_auto(self):
         if self.hit_location == 'head':
             damage_dealt = ((self.damage - self.armor_protection) * 4) + self.bc_to_mbc()
-
-            if damage_dealt < 0:
-                damage_dealt = 0
-
-            self.hplost += damage_dealt
         else:
             damage_dealt = ((self.damage - self.armor_protection) * 2) + self.bc_to_mbc()
 
-            if damage_dealt < 0:
-                damage_dealt = 0
+        if damage_dealt < 0:
+            damage_dealt = 0
 
-            self.hplost += damage_dealt
+        self.hplost += damage_dealt
 
     def hns_armor_protection(self, armor_piercing):
         armor_to_armor_protection = (0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,
