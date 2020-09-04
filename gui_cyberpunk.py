@@ -41,7 +41,7 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
         if not fight.full_auto:
             enemy.damage = damage_table1[enemy.hns_damage(bonus_damage)][chosen_weapon_damage - 1]
         else:
-            enemy.full_auto_damage(fight.number_of_hits, (chosen_weapon_damage - 1), bonus_damage, damage_table1)
+            enemy.full_auto_damage(fight.number_of_hits, chosen_weapon_damage, bonus_damage, damage_table1)
 
         if not fight.aiming_at_body_location:
             enemy.random_hit_location()

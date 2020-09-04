@@ -41,9 +41,10 @@ class Character:
 
     def full_auto_damage(self, number_of_hits_func, weapon_damage_func, weapon_damage_bonus_func, damage_table_func):
         damage_func = 0
+
         for i in range(0, number_of_hits_func):
-            dice_damage_func = self.hns_damage(weapon_damage_bonus_func)
-            damage_func += damage_table_func[dice_damage_func][weapon_damage_func]
+            damage_func += damage_table_func[self.hns_damage(weapon_damage_bonus_func)][weapon_damage_func - 1]
+
         self.damage = damage_func
 
     def damage_dealt_full_auto(self, number_of_hits_func):
