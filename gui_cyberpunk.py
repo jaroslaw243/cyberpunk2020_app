@@ -21,7 +21,7 @@ damage_table1 = ((0, 1, 1, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 11, 14, 16),
                  (3, 4, 6, 8, 9, 9, 10, 11, 9, 11, 12, 13, 14, 20, 28, 32),
                  (4, 5, 7, 9, 10, 9, 10, 11, 9, 11, 12, 13, 14, 20, 28, 32))
 
-fight = Combat(False, False, None, False, 0, 0, False)
+fight = Combat(False, False, None, False, 0, 0, False, False, False)
 
 
 def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
@@ -37,6 +37,12 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
                         mod16.get(), mod17.get(), mod18.get(), mod19.get()]))
     fight.shot_parameters(chosen_weapon, dist, difficulty_table1, enemy.dodgebase)
     fight.hit_calc(base_t_h_v + sum_mods)
+
+    if fight.fumble:
+        fumbled = 'Fumble!'
+    else:
+        fumbled = ''
+
     if fight.hit:
         if not fight.full_auto:
             enemy.damage = damage_table1[enemy.hns_damage(bonus_damage)][chosen_weapon_damage - 1]
@@ -61,16 +67,16 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
                 char_state_c = 'Character is stunned. \n'
             if enemy.hit_location == 'head' and enemy.hplost >= 13:
                 char_state_c = ''
-                char_state_l = 'Character died.'
+                char_state_l = 'Character died. \n'
         else:
-            char_state_l = 'Character died.'
+            char_state_l = 'Character died. \n'
 
-        output[
-            'text'] = f'Hit landed at {enemy.hit_location} and dealt {enemy.hplost} damage. \n' + char_state_c + char_state_l
+        output['text'] = f'Hit landed at {enemy.hit_location} and dealt {enemy.hplost} damage. \n' + char_state_c\
+                         + char_state_l + fumbled
     else:
-        output['text'] = 'Missed.'
+        output['text'] = 'Missed. \n' + fumbled
 
-    fight = Combat(False, False, None, False, 0, 0, False)
+    fight = Combat(False, False, None, False, 0, 0, False, False, False)
 
 
 def get_value(entryWidget):

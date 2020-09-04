@@ -110,7 +110,8 @@ class Character:
 
 
 class Combat:
-    def __init__(self, full_auto, monoblade, difficulty, hit, number_of_hits, rate_of_fire, aiming_at_body_location):
+    def __init__(self, full_auto, monoblade, difficulty, hit, number_of_hits, rate_of_fire, aiming_at_body_location,
+                 fumble, critical_hit):
         self.full_auto = full_auto
         self.monoblade = monoblade
         self.difficulty = difficulty
@@ -118,6 +119,8 @@ class Combat:
         self.number_of_hits = number_of_hits
         self.rate_of_fire = rate_of_fire
         self.aiming_at_body_location = aiming_at_body_location
+        self.fumble = fumble
+        self.critical_hit = critical_hit
 
     @staticmethod
     def hns_difficulty(distance_to_target):
@@ -159,6 +162,12 @@ class Combat:
 
     def hit_calc(self, base_to_hit_value):
         dice_hit = random.randint(1, 10)
+
+        if dice_hit == 1:
+            self.fumble = True
+        elif dice_hit == 10:
+            self.critical_hit = True
+
         if self.difficulty is None:
             self.hit = False
 
