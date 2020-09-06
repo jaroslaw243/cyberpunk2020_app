@@ -102,11 +102,11 @@ class Character:
     @staticmethod
     def hns_damage(bonus_to_roll):
         damage_rolls = (0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7)
-        total_roll = damage_rolls[random.randint(0, 14)] + bonus_to_roll
-        if total_roll <= 7:
-            return total_roll
+        total_roll = random.randint(0, 9) + bonus_to_roll
+        if total_roll <= 14:
+            return damage_rolls[total_roll]
         else:
-            return 7
+            return damage_rolls[14]
 
 
 class Combat:
