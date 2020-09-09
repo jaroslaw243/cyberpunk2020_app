@@ -26,7 +26,7 @@ fight = Combat(False, False, None, False, 0, 0, False, False, False)
 
 def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
     global fight
-    enemy_stats = npcs.all_npcs[enemy_stats_index.get() - 1]
+    enemy_stats = npcs.all_npcs[enemy_stats_index.get()]
     enemy = Character(0, enemy_stats['BC'], enemy_stats['dodgebase'], enemy_stats['armorhead'],
                       enemy_stats['armortorso'], enemy_stats['armorlefthand'], enemy_stats['armorrighthand'],
                       enemy_stats['armorleftleg'], enemy_stats['armorrightleg'], enemy_stats['hard_armor'])
@@ -45,7 +45,7 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
 
     if fight.hit:
         if not fight.full_auto:
-            enemy.damage = damage_table1[enemy.hns_damage(bonus_damage)][chosen_weapon_damage - 1]
+            enemy.damage = damage_table1[enemy.hns_damage(bonus_damage)][chosen_weapon_damage]
         else:
             enemy.full_auto_damage(fight.number_of_hits, chosen_weapon_damage, bonus_damage, damage_table1)
 
@@ -176,32 +176,33 @@ bonus_damage_entry.place(rely=0.13, relx=0.4, relheight=0.07, relwidth=0.23)
 base_t_h_v_entry = tk.Entry(inputs_menu)
 base_t_h_v_entry.place(rely=0.235, relx=0.4, relheight=0.07, relwidth=0.23)
 
-weapon_choice = tk.IntVar(value=1)
+weapon_choice = tk.IntVar(value=0)
 text_for_w_radiobutton = ("Handgun (also paintball guns, dart guns and tasers)", "SMG, Bow", "Shotgun", "Rifle, MG",
                           "Laser (also microwavers)", "Cannon (also grenade launchers and hand thrown grenades)",
                           "Missile (also mini-missiles)", "Rockets", "Brawling", "Melee weapon", "Monoblade")
-for row_w in range(11):
-    R = tk.Radiobutton(weapons_menu, text=text_for_w_radiobutton[row_w], variable=weapon_choice, value=row_w + 1,
+for row_w in range(len(text_for_w_radiobutton)):
+    R = tk.Radiobutton(weapons_menu, text=text_for_w_radiobutton[row_w], variable=weapon_choice, value=row_w,
                        bg='#b50000')
     R.pack(anchor='w')
 
-enemy_stats_index = tk.IntVar(value=1)
-for row_c in range(1, len(npcs.all_npcs) + 1):
-    A = tk.Radiobutton(characters_menu, text=npcs.all_npcs[row_c - 1]['name'], variable=enemy_stats_index, value=row_c,
+enemy_stats_index = tk.IntVar(value=0)
+for row_c in range(len(npcs.all_npcs)):
+    A = tk.Radiobutton(characters_menu, text=npcs.all_npcs[row_c]['name'], variable=enemy_stats_index, value=row_c,
                        bg='#F3ED73')
-    A.grid(sticky='w', column=0, row=row_c)
+    A.grid(sticky='w', column=0, row=row_c + 1)
 
-damage_choice = tk.IntVar(value=1)
+damage_choice = tk.IntVar(value=0)
 text_for_d_radiobutton = ("1d6/3", "1d6/2", "1d6", "2d6", "3d6", "4d6", "5d6", "6d6", "3d10", "4d10", "5d10", "6d10",
                           "7d10", "8d10", "9d10", "More")
-for row_d1 in range(8):
-    D = tk.Radiobutton(w_dam_entry, text=text_for_d_radiobutton[row_d1], variable=damage_choice, value=row_d1 + 1,
+elements_in_one_col_d = int(len(text_for_d_radiobutton)/2)
+for row_d1 in range(elements_in_one_col_d):
+    D = tk.Radiobutton(w_dam_entry, text=text_for_d_radiobutton[row_d1], variable=damage_choice, value=row_d1,
                        bg='#52b94c')
     D.grid(sticky='w', column=0)
 
-for row_d2 in range(8):
-    D = tk.Radiobutton(w_dam_entry, text=text_for_d_radiobutton[row_d2 + 8], variable=damage_choice, value=row_d2 + 9,
-                       bg='#52b94c')
+for row_d2 in range(elements_in_one_col_d):
+    D = tk.Radiobutton(w_dam_entry, text=text_for_d_radiobutton[row_d2 + elements_in_one_col_d], variable=damage_choice,
+                       value=row_d2 + elements_in_one_col_d, bg='#52b94c')
     D.grid(sticky='w', column=1, row=row_d2 + 1)
 
 mod1 = tk.IntVar()

@@ -43,7 +43,7 @@ class Character:
         damage_func = 0
 
         for i in range(0, number_of_hits_func):
-            damage_func += damage_table_func[self.hns_damage(weapon_damage_bonus_func)][weapon_damage_func - 1]
+            damage_func += damage_table_func[self.hns_damage(weapon_damage_bonus_func)][weapon_damage_func]
 
         self.damage = damage_func
 
@@ -146,18 +146,18 @@ class Combat:
 
     def shot_parameters(self, weapon, distance, difficulty_table, dodgebase):
 
-        if 1 <= weapon <= 11:
+        if 0 <= weapon <= 10:
 
-            if 1 <= weapon <= 8:
+            if 0 <= weapon <= 7:
                 try:
-                    self.difficulty = difficulty_table[self.hns_difficulty(distance)][weapon - 1]
+                    self.difficulty = difficulty_table[self.hns_difficulty(distance)][weapon]
                 except TypeError:
                     pass
             else:
                 self.full_auto = False
                 self.difficulty = dodgebase + random.randint(1, 10)
 
-                if weapon == 11:
+                if weapon == 10:
                     self.monoblade = True
 
     def hit_calc(self, base_to_hit_value):
