@@ -79,8 +79,8 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
     fight = Combat(False, False, None, False, 0, 0, False, False, False)
 
 
-def get_value(entryWidget):
-    value = entryWidget.get()
+def get_value(entry_widget):
+    value = entry_widget.get()
     try:
         return int(value)
     except ValueError:
@@ -95,19 +95,19 @@ def popup_ch_bod_loc():
     canvas_top = tk.Canvas(choose_hit_location, height=0, width=280)
     canvas_top.pack()
 
-    BL1 = tk.Radiobutton(choose_hit_location, text="Head", variable=hit_location_temp, value='head')
-    BL2 = tk.Radiobutton(choose_hit_location, text="Torso", variable=hit_location_temp, value='torso')
-    BL3 = tk.Radiobutton(choose_hit_location, text="Left arm", variable=hit_location_temp, value='left arm')
-    BL4 = tk.Radiobutton(choose_hit_location, text="Right arm", variable=hit_location_temp, value='right arm')
-    BL5 = tk.Radiobutton(choose_hit_location, text="Left leg", variable=hit_location_temp, value='left leg')
-    BL6 = tk.Radiobutton(choose_hit_location, text="Right leg", variable=hit_location_temp, value='right leg')
+    bl1 = tk.Radiobutton(choose_hit_location, text="Head", variable=hit_location_temp, value='head')
+    bl2 = tk.Radiobutton(choose_hit_location, text="Torso", variable=hit_location_temp, value='torso')
+    bl3 = tk.Radiobutton(choose_hit_location, text="Left arm", variable=hit_location_temp, value='left arm')
+    bl4 = tk.Radiobutton(choose_hit_location, text="Right arm", variable=hit_location_temp, value='right arm')
+    bl5 = tk.Radiobutton(choose_hit_location, text="Left leg", variable=hit_location_temp, value='left leg')
+    bl6 = tk.Radiobutton(choose_hit_location, text="Right leg", variable=hit_location_temp, value='right leg')
 
-    BL1.pack(anchor='w')
-    BL2.pack(anchor='w')
-    BL3.pack(anchor='w')
-    BL4.pack(anchor='w')
-    BL5.pack(anchor='w')
-    BL6.pack(anchor='w')
+    bl1.pack(anchor='w')
+    bl2.pack(anchor='w')
+    bl3.pack(anchor='w')
+    bl4.pack(anchor='w')
+    bl5.pack(anchor='w')
+    bl6.pack(anchor='w')
 
 
 root = tk.Tk()
