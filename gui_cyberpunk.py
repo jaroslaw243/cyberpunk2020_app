@@ -134,7 +134,7 @@ weapon_m_label.pack(anchor='w')
 
 mods_menu = tk.Frame(root, bg='#00a0d1')
 mods_menu.place(relx=0.025, rely=0.475, relwidth=0.322, relheight=0.415)
-mods_m_label = tk.Label(mods_menu, text='2) Choose your modifiers:', bg='#00a0d1')
+mods_m_label = tk.Label(mods_menu, text='4) Choose your modifiers:', bg='#00a0d1')
 mods_m_label.grid(column=0, row=0, sticky='w')
 
 inputs_menu = tk.Frame(root, bg='#FF7700')
@@ -142,12 +142,12 @@ inputs_menu.place(relx=0.397, rely=0.475, relwidth=0.322, relheight=0.415)
 
 w_dam_entry = tk.Frame(root, bg='#52b94c')
 w_dam_entry.place(relx=0.397, rely=0.025, relwidth=0.25, relheight=0.415)
-w_dam_label = tk.Label(w_dam_entry, text='3) Choose damage dealt by weapon:', bg='#52b94c')
+w_dam_label = tk.Label(w_dam_entry, text='2) Choose damage dealt by weapon:', bg='#52b94c')
 w_dam_label.grid(sticky='w', column=0, row=0)
 
 characters_menu = tk.Frame(root, bg='#F3ED73')
 characters_menu.place(relx=0.697, rely=0.025, relwidth=0.278, relheight=0.415)
-char_label = tk.Label(characters_menu, text='4) Choose character to fight:', bg='#F3ED73')
+char_label = tk.Label(characters_menu, text='3) Choose character to fight:', bg='#F3ED73')
 char_label.grid(sticky='w', column=0, row=0)
 
 distance_label = tk.Label(inputs_menu, bg='#FF7700', text='Distance to target [m]')
