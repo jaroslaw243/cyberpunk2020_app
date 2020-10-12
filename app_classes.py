@@ -71,7 +71,7 @@ class Character:
 
         self.hplost += damage_dealt
 
-    def hns_armor_protection(self, armor_piercing):
+    def hns_armor_protection(self, ap_blade, ap_ammo):
         armor_to_armor_protection = (0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7,
                                      7, 7,
                                      7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 12, 12, 12,
@@ -86,8 +86,10 @@ class Character:
         if armor > 80:
             armor = 80
 
-        if not armor_piercing:
+        if not ap_blade and not ap_ammo:
             self.armor_protection = armor_to_armor_protection[armor]
+        elif not ap_blade and ap_ammo:
+            self.armor_protection = round(armor_to_armor_protection[armor] / 2)
         else:
             if self.hard_armor:
                 self.armor_protection = round(armor_to_armor_protection[armor] / 2)
@@ -111,7 +113,7 @@ class Character:
 
 class Combat:
     def __init__(self, full_auto, monoblade, difficulty, hit, number_of_hits, rate_of_fire, aiming_at_body_location,
-                 fumble, critical_hit):
+                 fumble, critical_hit, armor_piercing_ammo):
         self.full_auto = full_auto
         self.monoblade = monoblade
         self.difficulty = difficulty
@@ -121,6 +123,7 @@ class Combat:
         self.aiming_at_body_location = aiming_at_body_location
         self.fumble = fumble
         self.critical_hit = critical_hit
+        self.armor_piercing_ammo = armor_piercing_ammo
 
     @staticmethod
     def hns_difficulty(distance_to_target):
@@ -191,3 +194,7 @@ class Combat:
         if 11 <= mod <= 17:
             self.full_auto = True
             self.rate_of_fire = rates_of_fire_list[mod - 11]
+
+    def set_armor_piercing(self, ap):
+        if ap == 1:
+            self.armor_piercing_ammo = True

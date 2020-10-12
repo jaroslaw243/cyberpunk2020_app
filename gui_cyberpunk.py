@@ -21,7 +21,7 @@ damage_table1 = ((0, 1, 1, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 11, 14, 16),
                  (3, 4, 6, 8, 9, 9, 10, 11, 9, 11, 12, 13, 14, 20, 28, 32),
                  (4, 5, 7, 9, 10, 9, 10, 11, 9, 11, 12, 13, 14, 20, 28, 32))
 
-fight = Combat(False, False, None, False, 0, 0, False, False, False)
+fight = Combat(False, False, None, False, 0, 0, False, False, False, False)
 
 
 def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
@@ -56,7 +56,7 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
             root.wait_window(choose_hit_location)
             enemy.hit_location = hit_location_temp.get()
 
-        enemy.hns_armor_protection(fight.monoblade)
+        enemy.hns_armor_protection(fight.monoblade, fight.armor_piercing_ammo)
         if not fight.full_auto:
             enemy.damage_dealt_no_full_auto()
         else:
@@ -76,7 +76,7 @@ def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
     else:
         output['text'] = 'Missed. \n' + fumbled
 
-    fight = Combat(False, False, None, False, 0, 0, False, False, False)
+    fight = Combat(False, False, None, False, 0, 0, False, False, False, False)
 
 
 def get_value(entry_widget):
@@ -224,6 +224,9 @@ mod16 = tk.DoubleVar()
 mod17 = tk.DoubleVar()
 mod18 = tk.IntVar()
 mod19 = tk.IntVar()
+
+ap = tk.IntVar()
+
 C1 = tk.Checkbutton(mods_menu, text="Target Immobile (+2) ", variable=mod1, onvalue=2, bg='#00a0d1')
 C2 = tk.Checkbutton(mods_menu, text="Target Dodging (-2)", variable=mod2, onvalue=-2, bg='#00a0d1')
 C3 = tk.Checkbutton(mods_menu, text="Target Dodging, REF 10+ (-4)", variable=mod3, onvalue=-4, bg='#00a0d1')
@@ -251,6 +254,9 @@ C17 = tk.Checkbutton(mods_menu, text="100-round burst (+15)", variable=mod17, on
                      command=lambda: fight.modifiers(mod17.get()))
 C18 = tk.Checkbutton(mods_menu, text="Fast draw (-2)", variable=mod18, onvalue=-2, bg='#00a0d1')
 C19 = tk.Checkbutton(mods_menu, text="Blinded/in the dark (-2)", variable=mod19, onvalue=-2, bg='#00a0d1')
+C20 = tk.Checkbutton(mods_menu, text="Armor piercing (+0)", variable=ap, bg='#00a0d1',
+                     command=lambda: fight.set_armor_piercing(ap.get()))
+
 C1.grid(column=0, row=1, sticky='w')
 C2.grid(column=0, row=2, sticky='w')
 C3.grid(column=0, row=3, sticky='w')
@@ -270,5 +276,6 @@ C16.grid(column=1, row=6, sticky='w')
 C17.grid(column=1, row=7, sticky='w')
 C18.grid(column=1, row=8, sticky='w')
 C19.grid(column=1, row=9, sticky='w')
+C20.grid(column=1, row=10, sticky='w')
 
 root.mainloop()
