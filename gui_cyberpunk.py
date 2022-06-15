@@ -1,6 +1,6 @@
 import tkinter as tk
 import os.path
-import npcs
+import yaml
 from app_classes import Character, Combat
 
 difficulty_table1 = ((10, 5, 10, 10, 5, 15, None, 15),
@@ -23,10 +23,13 @@ damage_table1 = ((0, 1, 1, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 11, 14, 16),
 
 fight = Combat(False, False, None, False, 0, 0, False, False, False, False)
 
+with open('./npcs.yaml') as file:
+    npcs = yaml.load(file, Loader=yaml.Loader)
 
-def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon):
+
+def main(dist, base_t_h_v, bonus_damage, chosen_weapon_damage, chosen_weapon, npcs_func):
     global fight
-    enemy_stats = npcs.all_npcs[enemy_stats_index.get()]
+    enemy_stats = npcs_func[enemy_stats_index.get()]
     enemy = Character(0, enemy_stats['BC'], enemy_stats['dodgebase'], enemy_stats['armorhead'],
                       enemy_stats['armortorso'], enemy_stats['armorlefthand'], enemy_stats['armorrighthand'],
                       enemy_stats['armorleftleg'], enemy_stats['armorrightleg'], enemy_stats['hard_armor'])
@@ -161,7 +164,7 @@ start_button = tk.Button(inputs_menu, text='Fight!', font=40, command=lambda: ma
                                                                                    get_value(base_t_h_v_entry),
                                                                                    get_value(bonus_damage_entry),
                                                                                    damage_choice.get(),
-                                                                                   weapon_choice.get()))
+                                                                                   weapon_choice.get(), npcs))
 start_button.place(relheight=0.2825, relwidth=0.28175, relx=0.675, rely=0.025)
 
 output = tk.Label(inputs_menu, font=60)
@@ -186,8 +189,8 @@ for row_w in range(len(text_for_w_radiobutton)):
     R.pack(anchor='w')
 
 enemy_stats_index = tk.IntVar(value=0)
-for row_c in range(len(npcs.all_npcs)):
-    A = tk.Radiobutton(characters_menu, text=npcs.all_npcs[row_c]['name'], variable=enemy_stats_index, value=row_c,
+for row_c in range(len(npcs)):
+    A = tk.Radiobutton(characters_menu, text=npcs[row_c]['name'], variable=enemy_stats_index, value=row_c,
                        bg='#F3ED73')
     A.grid(sticky='w', column=0, row=row_c + 1)
 

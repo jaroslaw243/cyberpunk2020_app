@@ -1,0 +1,71 @@
+!!python/tuple
+- BC: 7
+  armorhead: 20
+  armorlefthand: 10
+  armorleftleg: 6
+  armorrighthand: 10
+  armorrightleg: 6
+  armortorso: 10
+  dodgebase: 18
+  hard_armor: true
+  name: Valkyrie
+- BC: 10
+  armorhead: 25
+  armorlefthand: 20
+  armorleftleg: 20
+  armorrighthand: 20
+  armorrightleg: 20
+  armortorso: 20
+  dodgebase: 10
+  hard_armor: true
+  name: Cultist officer
+- BC: 8
+  armorhead: 20
+  armorlefthand: 18
+  armorleftleg: 14
+  armorrighthand: 18
+  armorrightleg: 14
+  armortorso: 18
+  dodgebase: 12
+  hard_armor: false
+  name: Elite cultist
+- BC: 5
+  armorhead: 20
+  armorlefthand: 4
+  armorleftleg: 4
+  armorrighthand: 4
+  armorrightleg: 4
+  armortorso: 4
+  dodgebase: 10
+  hard_armor: false
+  name: Basic cultist
+- BC: 8
+  armorhead: 25
+  armorlefthand: 25
+  armorleftleg: 25
+  armorrighthand: 25
+  armorrightleg: 25
+  armortorso: 25
+  dodgebase: 10
+  hard_armor: true
+  name: Corp grunt
+- BC: 9
+  armorhead: 28
+  armorlefthand: 30
+  armorleftleg: 10
+  armorrighthand: 30
+  armorrightleg: 10
+  armortorso: 26
+  dodgebase: 18
+  hard_armor: true
+  name: Stockley guard
+- BC: 5
+  armorhead: 20
+  armorlefthand: 4
+  armorleftleg: 4
+  armorrighthand: 4
+  armorrightleg: 4
+  armortorso: 4
+  dodgebase: 8
+  hard_armor: false
+  name: Militia

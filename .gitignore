@@ -7,3 +7,4 @@ venv
 build
 dist
 cyberpunk_window_icon.ico
+npcs.py
